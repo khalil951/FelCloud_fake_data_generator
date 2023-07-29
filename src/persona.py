@@ -2,14 +2,15 @@ from .behavior import PersonaBehavior
 from random import randint
 
 class Persona:
-    def __init__(self, name="khalil", age=31, occupation="developer"):
-        id
+    def __init__(self, id=None, name="khalil", age=31, occupation="developer"):
+        self.id  = id
         self.name = name
         self.age = age
         self.occupation = occupation
         self.project = [PersonaBehavior() for _ in range(randint(1,10))]
 
     def describe(self):
+        print(f"identifier: {self.id}")
         print(f"Name: {self.name}")
         print(f"Age: {self.age}")
         print(f"Occupation: {self.occupation}")
@@ -20,11 +21,13 @@ class Persona:
     def to_dict(self):
         data = [
             {
+                "identifier":self.id,
                 "name":self.name,
                 "age":self.age,
                 "occupation":self.occupation,
                 "flavor":project.flavor.name,
-                "period":project.period
+                "start_date":project.start_date,
+                "end_date":project.end_date
             }
             for project in self.project
         ]
@@ -33,7 +36,7 @@ class Persona:
         
 
 class Developer(Persona):
-    def __init__(self, name, age, occupation,programming_languages):
+    def __init__(self, name, age, occupation, programming_languages):
         super().__init__(name, age, occupation)
         self.programming_languages = programming_languages
 

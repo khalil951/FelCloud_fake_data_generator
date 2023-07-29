@@ -1,36 +1,33 @@
 from .flavor import SmallFlavor , MediumFlavor , LargeFlavor , XXLFlavor
 from random import randint
-from datetime import datetime, timedelta
+from datetime import date , timedelta
 
 class Behavior:
-    def __init__(self, period, flavor):
-        self.period = period
+    def __init__(self, flavor , start_date , end_date):
         self.flavor = flavor
+        self.start_date = start_date
+        self.end_date = end_date
+        
 
     def describe(self):
-        print(f"Period of Usage: {self.period}")
+        print(f"start_date: {self.start_date}")
+        print(f"end_date: {self.end_date}")
         self.flavor.describe()
-#start date = janvier 2022 -> decembre 2025
-#end period
 
 class PersonaBehavior(Behavior):
     def __init__(self):
-        min_period = 1*24*7  #number of hours in 1week
-        max_period = 52*24*7 #number of hours in 1year
-        random_period = randint(min_period, max_period)
-        start_date = datetime.now()
-        period = start_date + timedelta(hours=random_period)
+        start_date = date(2022 , 1 , 1)
+        end_date = date(2025 , 12 , 30)
         random_flavor = randint(0,3)
         flavors = [SmallFlavor(), MediumFlavor(), LargeFlavor(), XXLFlavor()]
-        super().__init__(period, flavors[random_flavor])
+        super().__init__(flavors[random_flavor] , start_date , end_date)
 
     def describe(self):
-        print(f"period : {self.period}")
-        self.flavor.describe()
+        super().describe()
 
-# Creating instances of Behavior classes
+# Creating instance
 persona_behavior = PersonaBehavior()
-persona_behavior.describe()
+
 
 
 
